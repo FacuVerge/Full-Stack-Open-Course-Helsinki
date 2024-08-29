@@ -10,7 +10,7 @@ const App = () => {
 	
 	const [persons, setPersons] = useState([])
 	const [newName, setNewName] = useState('')
-	const [newNumber, setNewNumber] = useState('')
+	const [newPhone, setNewPhone] = useState('')
 	const [filter, setFilter] = useState('')
 	const [message, setMessage] = useState(null)
 	const [isSucceed, setIsSucceed] = useState(false)
@@ -26,8 +26,8 @@ const App = () => {
 		setNewName(event.target.value)
 	}
 
-	const handleNumberChange = (event) => {
-		setNewNumber(event.target.value)
+	const handlePhoneChange = (event) => {
+		setNewPhone(event.target.value)
 	}
 
 	const handleFilterChange = (event) => {
@@ -39,9 +39,9 @@ const App = () => {
 		
 		if(persons.map(person => person.name).includes(newName)) {
 			const person = persons.find(n => n.name === newName)
-			if(!(person.name === newName && person.number === newNumber)) {
-				if (window.confirm(`${person.name} is already in database. Do you want to change its number?`)) {
-					const changedPerson = { ...person, number: newNumber }
+			if(!(person.name === newName && person.phone === newPhone)) {
+				if (window.confirm(`${person.name} is already in database. Do you want to change its phone?`)) {
+					const changedPerson = { ...person, phone: newPhone }
 					personsService.put(changedPerson)
 						.then(personChanged => {
 							setPersons(persons.map(person => person.id !== changedPerson.id ? person : personChanged))
@@ -51,7 +51,7 @@ const App = () => {
 		}else{
 			const newPerson = {
 				name: newName,
-				number: newNumber
+				phone: newPhone
 			}
 			personsService.create(newPerson)
 				.then(personCreated => {
@@ -59,7 +59,7 @@ const App = () => {
 				})
 		}
 		setNewName('');
-		setNewNumber('');
+		setNewPhone('');
 		setIsSucceed(true)
 		setMessage(`Action completed successfully`)        
 		setTimeout(() => {          
@@ -95,10 +95,10 @@ const App = () => {
 				handleSubmit={handleSubmit}
 				newName={newName}
 				handleNameChange={handleNameChange}
-				newNumber={newNumber}
-				handleNumberChange={handleNumberChange}
+				newPhone={newPhone}
+				handlePhoneChange={handlePhoneChange}
 			/>
-			<h2>Numbers</h2>
+			<h2>Phones</h2>
 			<Persons persons={personsShowed} handleDelete={handleDelete}/>
 		</div>
 	)
