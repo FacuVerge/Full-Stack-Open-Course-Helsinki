@@ -59,7 +59,7 @@ const App = () => {
 				}).catch(error => {
 					console.log(error.response.data.error)
 					setIsSucceed(false)   
-					setMessage(`Could not create ${newPerson.name}`)        
+					setMessage(`Could not create ${newPerson.name}. Error is ${error.response.data.error}`)        
 					setTimeout(() => {          
 						setMessage(null)        
 					}, 5000)
