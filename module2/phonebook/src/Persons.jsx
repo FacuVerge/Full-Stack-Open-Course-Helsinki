@@ -5,7 +5,7 @@ const Persons = ({persons, handleDelete}) => {
         <table>
             <tbody>
                 {persons.map(person => 
-                    <Person key={person.name} person={person} handleDelete={handleDelete} />
+                    <Person key={person.id} person={person} handleDelete={handleDelete} />
                 )}
             </tbody>
         </table>
