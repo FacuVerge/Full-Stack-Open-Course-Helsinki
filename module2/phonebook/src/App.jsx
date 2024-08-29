@@ -56,6 +56,13 @@ const App = () => {
 			personsService.create(newPerson)
 				.then(personCreated => {
 					setPersons(persons.concat(personCreated));
+				}).catch(error => {
+					console.log(error.response.data.error)
+					setIsSucceed(false)   
+					setMessage(`Could not create ${newPerson.name}`)        
+					setTimeout(() => {          
+						setMessage(null)        
+					}, 5000)
 				})
 		}
 		setNewName('');
