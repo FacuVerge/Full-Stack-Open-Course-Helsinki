@@ -45,6 +45,13 @@ const App = () => {
 					personsService.put(changedPerson)
 						.then(personChanged => {
 							setPersons(persons.map(person => person.id !== changedPerson.id ? person : personChanged))
+						}).catch(error => {
+							console.log(error.response.data.error)
+							setIsSucceed(false)   
+							setMessage(`Could not update ${newPerson.name}. ${error.response.data.error}`)        
+							setTimeout(() => {          
+								setMessage(null)        
+							}, 5000)
 						})
 				}
 			}
@@ -59,7 +66,7 @@ const App = () => {
 				}).catch(error => {
 					console.log(error.response.data.error)
 					setIsSucceed(false)   
-					setMessage(`Could not create ${newPerson.name}. Error is ${error.response.data.error}`)        
+					setMessage(`Could not create ${newPerson.name}. ${error.response.data.error}`)        
 					setTimeout(() => {          
 						setMessage(null)        
 					}, 5000)
